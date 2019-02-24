@@ -13,6 +13,7 @@
   "devDependencies": {
     "@babel/core": "^7.3.3",
     "@babel/preset-env": "^7.3.1",
+    "autoprefixer": "^9.4.8",
     "browser-sync": "^2.26.3",
     "gulp": "^3.9.1",
     "gulp-babel": "^8.0.0",
@@ -24,7 +25,12 @@
     "gulp-postcss": "^8.0.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.1",
+    "postcss-assets": "^5.0.0",
+    "postcss-nested": "^4.1.1",
+    "postcss-preset-env": "^6.5.0",
+    "postcss-short": "^5.0.0",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"
-  }
+  },
+  "dependencies": {}
 }

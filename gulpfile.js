@@ -9,6 +9,11 @@ const cssnano = require('gulp-cssnano');
 const sourcemaps = require('gulp-sourcemaps');
 const browserSync = require('browser-sync').create();
 const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
+const assets  = require('postcss-assets');
+const short = require('postcss-short');
+const nested = require('postcss-nested');
+const postcssPresetEnv = require('postcss-preset-env');
 
 const paths = {
     src: {
@@ -45,10 +50,20 @@ gulp.task('js', () => {
 });
 
 gulp.task('css', () => {
-    const plugin = [];
+    const plugins = [
+        autoprefixer({ browsers: ['last 1 version'] }),
+        postcssPresetEnv({ browsers: 'last 2 versions' }),
+        nested(),
+        short(),
+        assets({
+          loadPaths: ['img/'],
+          relativeTo: 'target/'
+        }),
+    ];
+
     return gulp.src([paths.src.styles])
     .pipe(sourcemaps.init())
-        .pipe(postcss())
+        .pipe(postcss(plugins))
         .pipe(concat(paths.targetNames.styles))
         .pipe(gulpif( process.env.NODE_ENV === 'production', cssnano() ))
     .pipe(sourcemaps.write()) 
