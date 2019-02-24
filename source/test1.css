@@ -1,3 +1,12 @@
+:root {
+    --mainColor: red;
+  }
+
 .wrapper {
     color: #000;
+
+    & div {
+        background: var(--mainColor);
+        size: 50px;
+    }
 }
