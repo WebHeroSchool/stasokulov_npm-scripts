@@ -14,25 +14,47 @@ const assets  = require('postcss-assets');
 const short = require('postcss-short');
 const nested = require('postcss-nested');
 const postcssPresetEnv = require('postcss-preset-env');
+const handlebars = require('gulp-compile-handlebars');
+const rename = require('gulp-rename');
+const glob = require("glob")
 
 const paths = {
     src: {
         styles: 'source/*css',
         scripts: 'source/*js',
+        dir: 'source',
     },
     target: {
         styles: 'target',
         scripts: 'target',
+        dir: './'
     },
     targetNames: {
         styles: 'index.min.css',
         scripts: 'index.min.js',
     },
+    templates: 'templates/**/*.hbs'
 };
 
 env({
     file: '.env',
     type: 'ini',
+});
+
+gulp.task('compile', () => {
+    glob(paths.templates, (err, files) => {
+        if(!err) {
+            const options = {
+                ignorePartials: true,
+                batch: files.map( item => item.slice(0, item.lastIndexOf('/')) )
+            };
+    
+            return gulp.src(`${paths.src.dir}/index.hbs`)
+                .pipe(handlebars({}, options))
+                .pipe(rename('index.html'))
+                .pipe(gulp.dest(paths.target.dir));
+        }
+    });
 });
 
 gulp.task('default', ['clean', 'js', 'css']);
