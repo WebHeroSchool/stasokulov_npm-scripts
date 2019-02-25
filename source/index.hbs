@@ -10,24 +10,10 @@
 </head>
 <body>
 
-    <header>
-        <h1>Это хедер</h1>
-    </header>
-    <aside>
-        <h1>Это асайд</h1>
-        <div>
-            Имя: Stas
-        </div>
-        <div>
-            Возраст: 34
-        </div>
-        <div>
-            Адрес: Syktywkar
-        </div>
-        <div>
-            Навык: web deweloper
-        </div>
-    </aside>
+    {{> header}}
+
+    {{> side}}
+
     <div class = 'wrapper'>
         Блок 1
         <div>
@@ -38,9 +24,8 @@
     <div class = 'block'>
     </div>
 
-    <footer>
-        <h1>Это футер</h1>
-    </footer>
+    {{> footer}}
+
     <script src="target/index.min.js"></script>
 </body>
 </html>
