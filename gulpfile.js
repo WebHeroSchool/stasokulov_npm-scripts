@@ -18,6 +18,8 @@ const handlebars = require('gulp-compile-handlebars');
 const rename = require('gulp-rename');
 const glob = require("glob");
 const templateContext = require('./templates/test.json');
+const eslint = require('gulp-eslint');
+const rulesScripts = require('./eslintrc.json');
 
 const paths = {
     src: {
@@ -34,7 +36,10 @@ const paths = {
         styles: 'index.min.css',
         scripts: 'index.min.js',
     },
-    templates: 'templates/**/*.hbs'
+    templates: 'templates/**/*.hbs',
+    lint: {
+        scripts: ['**/*.js', '!node_modules/**/*', '!target/**/*']
+    }
 };
 
 env({
@@ -47,7 +52,11 @@ gulp.task('compile', () => {
         if(!err) {
             const options = {
                 ignorePartials: true,
-                batch: files.map( item => item.slice(0, item.lastIndexOf('/')) )
+                batch: files.map( item => item.slice(0, item.lastIndexOf('/')) ),
+                helpers: {
+                    date: () => new Date,
+                    numLetter: (name) => name.length
+                }
             };
     
             return gulp.src(`${paths.src.dir}/index.hbs`)
@@ -113,4 +122,10 @@ gulp.task('dev', ['default', 'browser-sync']);
 gulp.task('clean', () => {
     return gulp.src('target/*', {read: false})
     .pipe(clean());
+});
+
+gulp.task('eslint', () => {
+    gulp.src(paths.lint.scripts)
+        .pipe( eslint(rulesScripts) )
+        .pipe(eslint.format());
 });
