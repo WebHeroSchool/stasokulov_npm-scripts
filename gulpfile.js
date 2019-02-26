@@ -47,7 +47,12 @@ gulp.task('compile', () => {
         if(!err) {
             const options = {
                 ignorePartials: true,
-                batch: files.map( item => item.slice(0, item.lastIndexOf('/')) )
+                batch: files.map( item => item.slice(0, item.lastIndexOf('/')) ),
+                helpers: {
+                    date: () => new Date,
+                    numLetter: (name) => name.length
+                }
+                
             };
     
             return gulp.src(`${paths.src.dir}/index.hbs`)
