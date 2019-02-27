@@ -20,6 +20,9 @@ const glob = require("glob");
 const templateContext = require('./templates/test.json');
 const eslint = require('gulp-eslint');
 const rulesScripts = require('./eslintrc.json');
+const stylelint = require('stylelint');
+const reporters  = require('postcss-reporter');
+const rulesStyles = require('./stylelintrc.json');
 
 const paths = {
     src: {
@@ -38,7 +41,8 @@ const paths = {
     },
     templates: 'templates/**/*.hbs',
     lint: {
-        scripts: ['**/*.js', '!node_modules/**/*', '!target/**/*']
+        scripts: ['**/*.js', '!node_modules/**/*', '!target/**/*'],
+        styles: ['**/*.css', '!node_modules/**/*', '!target/**/*'],
     }
 };
 
@@ -124,8 +128,22 @@ gulp.task('clean', () => {
     .pipe(clean());
 });
 
+gulp.task('lint', ['eslint', 'stylelint']);
+
 gulp.task('eslint', () => {
     gulp.src(paths.lint.scripts)
         .pipe( eslint(rulesScripts) )
         .pipe(eslint.format());
 });
+
+gulp.task('stylelint', () => {  
+    gulp.src(paths.lint.styles)
+        .pipe(postcss([
+            stylelint(rulesStyles),
+            reporters({
+                clearMessages: true,
+                throwError: false
+            })
+        ]));
+});
+         
