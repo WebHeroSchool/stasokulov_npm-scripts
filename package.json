@@ -8,9 +8,7 @@
     "start": "gulp dev",
     "build": "gulp"
   },
-  "pre-push": [
-    "test"
-  ],
+  "pre-push": "test",
   "author": "",
   "license": "ISC",
   "devDependencies": {
