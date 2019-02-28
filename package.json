@@ -4,10 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "gulp lint",
+    "test": "gulp lint && exit 1",
     "start": "gulp dev",
     "build": "gulp"
   },
+  "prepush": [
+    "test"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -31,6 +34,7 @@
     "postcss-nested": "^4.1.1",
     "postcss-preset-env": "^6.5.0",
     "postcss-short": "^5.0.0",
+    "pre-push": "^0.1.1",
     "stylelint": "^9.10.1",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"
