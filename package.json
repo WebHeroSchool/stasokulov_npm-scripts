@@ -4,10 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "gulp lint",
     "start": "gulp dev",
     "build": "gulp"
   },
+  "pre-push": [
+    "console.log('пуш')",
+    "foo",
+    "bar",
+    "test"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -25,17 +31,21 @@
     "gulp-if": "^2.0.2",
     "gulp-postcss": "^8.0.0",
     "gulp-sourcemaps": "^2.6.5",
+    "gulp-stylelint": "^8.0.0",
     "gulp-uglify": "^3.0.1",
     "postcss-assets": "^5.0.0",
     "postcss-nested": "^4.1.1",
     "postcss-preset-env": "^6.5.0",
     "postcss-short": "^5.0.0",
+    "pre-push": "^0.1.1",
+    "stylelint": "^9.10.1",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
     "glob": "^7.1.3",
     "gulp-eslint": "^5.0.0",
-    "gulp-rename": "^1.4.0"
+    "gulp-rename": "^1.4.0",
+    "postcss-reporter": "^6.0.1"
   }
 }
