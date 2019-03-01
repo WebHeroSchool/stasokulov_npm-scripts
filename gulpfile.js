@@ -128,7 +128,7 @@ gulp.task('clean', () => {
     .pipe(clean());
 });
 
-gulp.task('lint', ['eslint', 'stylelint']);
+gulp.task('lint', ['stylelint', 'eslint']);
 
 gulp.task('eslint', () => {
     gulp.src(paths.lint.scripts)

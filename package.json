@@ -6,9 +6,15 @@
   "scripts": {
     "test": "gulp lint",
     "start": "gulp dev",
-    "build": "gulp"
+    "build": "gulp",
+    "pre-push": "npm run test"
   },
-  "pre-push": "test",
+  "pre-push": [
+    "console.log('пуш')",
+    "foo",
+    "bar",
+    "test"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
