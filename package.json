@@ -6,8 +6,7 @@
   "scripts": {
     "test": "gulp lint",
     "start": "gulp dev",
-    "build": "gulp",
-    "pre-push": "npm run test"
+    "build": "gulp"
   },
   "pre-push": [
     "console.log('пуш')",
