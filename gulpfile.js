@@ -21,7 +21,7 @@ const templateContext = require('./templates/test.json');
 const eslint = require('gulp-eslint');
 const rulesScripts = require('./eslintrc.json');
 const stylelint = require('stylelint');
-const reporters  = require('postcss-reporter');
+const reporter  = require('postcss-reporter');
 const rulesStyles = require('./stylelintrc.json');
 
 const paths = {
@@ -136,14 +136,16 @@ gulp.task('eslint', () => {
         .pipe(eslint.format());
 });
 
-gulp.task('stylelint', () => {  
-    gulp.src(paths.lint.styles)
+function test2() {
+    return gulp.src(paths.lint.styles)
         .pipe(postcss([
             stylelint(rulesStyles),
-            reporters({
+            reporter({
                 clearMessages: true,
                 throwError: false
             })
         ]));
-});
+}
+
+gulp.task('stylelint', test2);
          
