@@ -133,16 +133,17 @@ gulp.task('lint', ['stylelint', 'eslint']);
 gulp.task('eslint', () => {
     gulp.src(paths.lint.scripts)
         .pipe( eslint(rulesScripts) )
-        .pipe(eslint.format());
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
 });
 
 gulp.task('stylelint', () => {
-    return gulp.src(paths.lint.styles)
+    gulp.src(paths.lint.styles)
         .pipe(postcss([
             stylelint(rulesStyles),
             reporter({
                 clearMessages: true,
-                throwError: false
+                throwError: true
             })
         ]));
 });

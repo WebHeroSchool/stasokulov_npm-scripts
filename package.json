@@ -13,6 +13,9 @@
     "build": "gulp",
     "prepush": "npm run test"
   },
+  "prepush": [
+    "test"
+  ],
   "husky": {
     "hooks": {
       "pre-push": "npm test",
