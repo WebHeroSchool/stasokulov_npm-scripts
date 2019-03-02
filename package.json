@@ -8,7 +8,7 @@
     "url": "https://github.com/npm/npm.git"
   },
   "scripts": {
-    "test": "gulp lint && exit 0",
+    "test": "gulp lint && exit 1",
     "start": "gulp dev",
     "build": "gulp",
     "prepush": "npm run test"
