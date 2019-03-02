@@ -8,14 +8,15 @@
     "url": "https://github.com/npm/npm.git"
   },
   "scripts": {
-    "test": "gulp lint && exit 1",
+    "test": "gulp lint",
     "start": "gulp dev",
     "build": "gulp",
     "prepush": "npm run test"
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm test"
+      "pre-push": "npm test",
+      "...": "..."
     }
   },
   "author": "",
