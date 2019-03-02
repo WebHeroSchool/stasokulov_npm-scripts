@@ -136,7 +136,7 @@ gulp.task('eslint', () => {
         .pipe(eslint.format());
 });
 
-function test2() {
+gulp.task('stylelint', () => {
     return gulp.src(paths.lint.styles)
         .pipe(postcss([
             stylelint(rulesStyles),
@@ -145,7 +145,4 @@ function test2() {
                 throwError: false
             })
         ]));
-}
-
-gulp.task('stylelint', test2);
-         
+});
