@@ -11,7 +11,8 @@
     "test": "gulp lint",
     "start": "gulp dev",
     "build": "gulp",
-    "prepush": "npm run test"
+    "prepush": "npm run test",
+    "postinstall": "gulp"
   },
   "prepush": [
     "test"
