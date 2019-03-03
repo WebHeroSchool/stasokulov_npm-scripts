@@ -1,0 +1,51 @@
+{
+  "name": "npm-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp lint",
+    "start": "gulp dev",
+    "build": "gulp"
+  },
+  "pre-push": [
+    "console.log('пуш')",
+    "foo",
+    "bar",
+    "test"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/preset-env": "^7.3.1",
+    "autoprefixer": "^9.4.8",
+    "browser-sync": "^2.26.3",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-compile-handlebars": "^0.6.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssnano": "^2.1.3",
+    "gulp-env": "^0.4.0",
+    "gulp-if": "^2.0.2",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-stylelint": "^8.0.0",
+    "gulp-uglify": "^3.0.1",
+    "postcss-assets": "^5.0.0",
+    "postcss-nested": "^4.1.1",
+    "postcss-preset-env": "^6.5.0",
+    "postcss-short": "^5.0.0",
+    "pre-push": "^0.1.1",
+    "stylelint": "^9.10.1",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "glob": "^7.1.3",
+    "gulp-eslint": "^5.0.0",
+    "gulp-rename": "^1.4.0",
+    "postcss-reporter": "^6.0.1"
+  }
+}

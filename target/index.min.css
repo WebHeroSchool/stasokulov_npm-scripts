@@ -1,0 +1,45 @@
+.header {
+    color: blue;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+::-webkit-input-placeholder {
+    color: gray;
+}
+
+:-ms-input-placeholder {
+    color: gray;
+}
+
+::-ms-input-placeholder {
+    color: gray;
+}
+
+::placeholder {
+    color: gray;
+}
+
+.block {
+    background: url('../img/tesla.png') no-repeat;
+    width: 968px;
+    height: 450px;
+    background-size: 484px 225px;
+}
+
+:root {
+    --mainColor: red;
+  }
+
+.wrapper {
+    color: #000;
+}
+
+.wrapper div {
+        background: red;
+        background: var(--mainColor);
+        width: 50px;
+        height: 50px;
+    }
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRlc3QuY3NzIiwidGVzdDEuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksV0FBVztJQUNYLG9CQUFhO0lBQWIsb0JBQWE7SUFBYixhQUFhO0FBQ2pCOztBQUVBO0lBQ0ksV0FBVztBQUNmOztBQUZBO0lBQ0ksV0FBVztBQUNmOztBQUZBO0lBQ0ksV0FBVztBQUNmOztBQUZBO0lBQ0ksV0FBVztBQUNmOztBQUVBO0lBQ0ksNkNBQTBDO0lBQzFDLFlBQTZCO0lBQzdCLGFBQStCO0lBQy9CLDRCQUF5QztBQUM3Qzs7QUNkQTtJQUNJLGdCQUFnQjtFQUNsQjs7QUFFRjtJQUNJLFdBQVc7QUFNZjs7QUFKSTtRQUNJLGVBQTRCO1FBQTVCLDRCQUE0QjtRQUM1QixXQUFVO1FBQVYsWUFBVTtJQUNkIiwiZmlsZSI6ImluZGV4Lm1pbi5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuaGVhZGVyIHtcclxuICAgIGNvbG9yOiBibHVlO1xyXG4gICAgZGlzcGxheTogZmxleDtcclxufVxyXG5cclxuOjpwbGFjZWhvbGRlciB7XHJcbiAgICBjb2xvcjogZ3JheTtcclxufVxyXG5cclxuLmJsb2NrIHtcclxuICAgIGJhY2tncm91bmQ6IHJlc29sdmUoJ3Rlc2xhLnBuZycpIG5vLXJlcGVhdDtcclxuICAgIHdpZHRoOiB3aWR0aCgnaW1nL3Rlc2xhLnBuZycpO1xyXG4gICAgaGVpZ2h0OiBoZWlnaHQoJ2ltZy90ZXNsYS5wbmcnKTtcclxuICAgIGJhY2tncm91bmQtc2l6ZTogc2l6ZSgnaW1nL3Rlc2xhLnBuZycsIDIpO1xyXG59XHJcbiIsIjpyb290IHtcclxuICAgIC0tbWFpbkNvbG9yOiByZWQ7XHJcbiAgfVxyXG5cclxuLndyYXBwZXIge1xyXG4gICAgY29sb3I6ICMwMDA7XHJcblxyXG4gICAgJiBkaXYge1xyXG4gICAgICAgIGJhY2tncm91bmQ6IHZhcigtLW1haW5Db2xvcik7XHJcbiAgICAgICAgc2l6ZTogNTBweDtcclxuICAgIH1cclxufSJdfQ== */

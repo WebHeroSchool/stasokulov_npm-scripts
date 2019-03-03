@@ -1,0 +1,15 @@
+.header {
+color: blue;
+display: flex;
+}
+
+::placeholder {
+    color: gray;
+}
+
+.block {
+    background: resolve('tesla.png') no-repeat;
+    width: width('img/tesla.png');
+    height: height('img/tesla.png');
+    background-size: size('img/tesla.png', 2);
+}
