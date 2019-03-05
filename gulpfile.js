@@ -1,34 +1,36 @@
-const env = require('gulp-env');
-const gulp = require('gulp');
-const babel = require('gulp-babel');
-const concat = require('gulp-concat');
-const gulpif = require('gulp-if');
-const clean = require('gulp-clean');
-const uglify = require('gulp-uglify');
-const cssnano = require('gulp-cssnano');
-const sourcemaps = require('gulp-sourcemaps');
-const browserSync = require('browser-sync').create();
-const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const assets  = require('postcss-assets');
-const short = require('postcss-short');
-const nested = require('postcss-nested');
-const postcssPresetEnv = require('postcss-preset-env');
-const handlebars = require('gulp-compile-handlebars');
-const rename = require('gulp-rename');
-const glob = require("glob");
-const templateContext = require('./templates/test.json');
+const babel = require('gulp-babel');
+const browserSync = require('browser-sync').create();
+const concat = require('gulp-concat');
+const clean = require('gulp-clean');
+const cssnano = require('gulp-cssnano');
+const env = require('gulp-env');
 const eslint = require('gulp-eslint');
+const filter = require('gulp-filter');
+const gulp = require('gulp');
+const glob = require("glob");
+const gulpif = require('gulp-if');
+const handlebars = require('gulp-compile-handlebars');
+const nested = require('postcss-nested');
+const postcss = require('gulp-postcss');
+const postcssPresetEnv = require('postcss-preset-env');
+const rename = require('gulp-rename');
 const rulesScripts = require('./eslintrc.json');
-const stylelint = require('stylelint');
 const reporter  = require('postcss-reporter');
 const rulesStyles = require('./stylelintrc.json');
+const sourcemaps = require('gulp-sourcemaps');
+const short = require('postcss-short');
+const stylelint = require('stylelint');
+const templateContext = require('./templates/test.json');
+const uglify = require('gulp-uglify');
 
 const paths = {
     src: {
         styles: 'source/*css',
         scripts: 'source/*js',
-        dir: 'source',
+        dir: './source',
+        assets: './source/img/**/*',
     },
     target: {
         styles: 'target',
@@ -37,18 +39,47 @@ const paths = {
     },
     targetNames: {
         styles: 'index.min.css',
-        scripts: 'index.min.js',
+        scripts: 'index.min.js'
     },
     templates: 'templates/**/*.hbs',
+
     lint: {
         scripts: ['**/*.js', '!node_modules/**/*', '!target/**/*'],
-        styles: ['**/*.css', '!node_modules/**/*', '!target/**/*'],
+        styles: ['**/*.css', '!node_modules/**/*', '!target/**/*']
     }
 };
 
 env({
     file: '.env',
     type: 'ini',
+});
+
+switch (process.env.NODE_ENV) {
+    case 'dev':
+        gulp.task('dev', [
+            'default',
+            'browser-sync'
+        ]);
+        break;
+    case 'prod':
+        gulp.task('prod', [
+            'default'
+        ]);
+        break;
+};
+
+gulp.task('default', [
+    'clean',
+    'fonts',
+    'assets',
+    'css',
+    'js',
+    'compile'
+]);
+
+gulp.task('clean', () => {
+    return gulp.src('target/*', {read: false})
+    .pipe(clean());
 });
 
 gulp.task('compile', () => {
@@ -62,16 +93,13 @@ gulp.task('compile', () => {
                     numLetter: (name) => name.length
                 }
             };
-    
             return gulp.src(`${paths.src.dir}/index.hbs`)
-                .pipe(handlebars(templateContext, options))
-                .pipe(rename('index.html'))
-                .pipe(gulp.dest(paths.target.dir));
+            .pipe(handlebars(templateContext, options))
+            .pipe(rename('index.html'))
+            .pipe(gulp.dest(paths.target.dir));
         }
     });
 });
-
-gulp.task('default', ['clean', 'js', 'css']);
 
 gulp.task('js', () => {
     return gulp.src(paths.src.scripts)
@@ -81,7 +109,7 @@ gulp.task('js', () => {
             presets: ['@babel/env']
         }))
         .pipe(gulpif( process.env.NODE_ENV === 'production', uglify() ))
-        .pipe(sourcemaps.write())    
+        .pipe( sourcemaps.write() )
     .pipe(gulp.dest(paths.target.scripts));
 });
 
@@ -115,18 +143,12 @@ gulp.task('browser-sync', () => {
 
     gulp.watch(paths.src.scripts, ['js-watch']);
     gulp.watch(paths.src.styles, ['css-watch']);
+    gulp.watch([paths.templates, `${paths.src.dir}/index.hbs`], ['compile-watch']);
 });
 
 gulp.task('js-watch', ['js'], () => browserSync.reload());
 gulp.task('css-watch', ['css'], () => browserSync.reload());
-
-gulp.task('prod', ['default']);
-gulp.task('dev', ['default', 'browser-sync']);
-
-gulp.task('clean', () => {
-    return gulp.src('target/*', {read: false})
-    .pipe(clean());
-});
+gulp.task('compile-watch', ['compile'], () => browserSync.reload());
 
 gulp.task('lint', ['stylelint', 'eslint']);
 
@@ -146,4 +168,21 @@ gulp.task('stylelint', () => {
                 throwError: true
             })
         ]));
+});
+
+gulp.task('fonts', () => {
+    gulp.src('./source/fonts/**/*')
+        .pipe(filter( ['**/*.woff', '**/*.woff2', '**/*.otf'] ))
+        .pipe(gulp.dest(`./target/fonts`));
+});
+
+gulp.task('assets', () => {
+    glob(paths.src.assets, (err, files) => {
+        if (!err) {
+            gulp.src(files)
+                .pipe(gulp.dest(`${paths.target.dir}img`));
+        } else {
+            throw err;
+        }
+    });
 });
