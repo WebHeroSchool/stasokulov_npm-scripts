@@ -14,6 +14,7 @@ const gulpif = require('gulp-if');
 const handlebars = require('gulp-compile-handlebars');
 const nested = require('postcss-nested');
 const postcss = require('gulp-postcss');
+const postcssCustomProperties = require('postcss-custom-properties');
 const postcssPresetEnv = require('postcss-preset-env');
 const rename = require('gulp-rename');
 const rulesScripts = require('./eslintrc.json');
@@ -27,7 +28,7 @@ const uglify = require('gulp-uglify');
 
 const paths = {
     src: {
-        styles: 'source/*css',
+        styles: 'source/**/*css',
         scripts: 'source/*js',
         dir: './source',
         assets: './source/img/**/*',
@@ -123,13 +124,16 @@ gulp.task('css', () => {
           loadPaths: ['img/'],
           relativeTo: 'target/'
         }),
+        postcssCustomProperties({
+            preserve: false
+        }),
     ];
 
     return gulp.src([paths.src.styles])
     .pipe(sourcemaps.init())
-        .pipe(postcss(plugins))
-        .pipe(concat(paths.targetNames.styles))
-        .pipe(gulpif( process.env.NODE_ENV === 'production', cssnano() ))
+    .pipe(concat(paths.targetNames.styles))
+    .pipe(postcss(plugins))
+    .pipe(gulpif( process.env.NODE_ENV === 'production', cssnano() ))
     .pipe(sourcemaps.write()) 
     .pipe(gulp.dest(paths.target.styles));
 });

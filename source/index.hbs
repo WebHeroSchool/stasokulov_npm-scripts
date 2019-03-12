@@ -3,29 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="target/index.min.css" rel="stylesheet">
-
-    <title>Document</title>
+    <link rel='stylesheet' href='target/index.min.css'>
+    <title>Tesla landing</title>
 </head>
 <body>
+    {{>header}}
+    <main>
+        <!--Первый этаж-->
+        {{>floor-main}}
 
-    {{> header}}
+        <!--Второй этаж-->
+        {{>floor-feature}}
 
-    {{> side}}
+        <!--Третий этаж-->
+        {{>floor-security}}
+         
+    </main>
 
-    <div class = 'wrapper'>
-        Блок 1
-        <div>
-            Блок внутри блока 1
-        </div>
-    </div>
-
-    <div class = 'block'>
-    </div>
-
-    {{> footer}}
-
-    <script src="target/index.min.js"></script>
+    <script src='target/index.min.js'></script>
 </body>
 </html>

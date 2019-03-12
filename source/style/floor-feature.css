@@ -1,0 +1,239 @@
+/*Второй этаж*/
+.floor-feature{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    &__text-body {
+        font-weight: 500;
+        font-size: 15px;
+        display: block;
+        line-height: 1.2;
+    }
+}
+
+.img-floor-feature{
+    max-width: 1000px;
+    position: relative;
+
+    &__heading {
+        font-size: 70px;
+        letter-spacing: .9px;
+        color: var(--mainColor);
+        left: 80px;
+        top: 62px;
+        position: absolute;
+    }
+
+    &__foto-wrapper {
+        height: 100%;
+        width: 100%;
+        margin: auto 0 0 0;
+        background-image: inline('../img/2013-tesla-model-s-cockpit.jpg');
+        background-position: left bottom;
+        background-repeat: no-repeat;
+    }
+
+    &__foto {
+        display: flex;
+    }
+}
+
+.description-floor-feature {
+    width: 440px;
+    font-weight: 600;
+    color: #FFFFFF;
+    background: var(--mainColor);
+    position: relative;
+
+    &__specifications {
+        text-align: left;
+        margin: auto 48px auto 52px;
+    }
+
+    &__text-heading {
+        font-size: 30px;
+        letter-spacing: .65px;
+        margin-bottom: 10px;
+    }
+
+    &__text {
+        text-align: left;
+        letter-spacing: .1px;
+    }
+
+    &__outer-wrap {
+        width: 190px;
+    }
+
+    &__inner-wrap {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: flex-end;
+        margin: 0 0 3px 0;
+    }
+
+    &__big-text {
+        font-size: 35px;
+        display: flex;
+        margin: 0 12px 0 0;
+        height: 36px;
+    }
+
+    &__medium-text {
+        font-size: 20px;
+        letter-spacing: .3px;
+        line-height: 95%;
+        margin: 0 0 0px 0;
+    }
+
+    &__small-text {
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    &__display {
+        display: flex;
+        margin: 0 auto 38px 0;
+    }
+
+    &__display-icon {
+        background: inline('../img/screen.png') no-repeat;
+        height: 53px;
+        width: 36px;
+        margin: 10px 19px auto 0;
+    }
+
+    &__WiFi {
+        display: flex;
+        margin: 0 auto 24px 0;
+    }
+
+    &__WiFi-icon {
+        background: inline('../img/wifi.png') no-repeat;    
+        margin: 15px 20px auto -4px;
+    }
+
+    &__WiFi-icon-inner {
+        height: 34px;
+        width: 44px;
+    }
+
+    &__battery {
+        display: flex;
+        margin: 0 auto 35px 0;
+    }
+
+    &__battery-icon {
+        background: inline('../img/bag.png') no-repeat;
+        margin: 12px 24px auto 0;
+    }
+
+    &__battery-icon-inner {
+        height: 52px;
+        width: 36px;
+    }
+}
+
+.floor-feature__order-motiv {
+    justify-content: space-between;
+    margin: 174px 44px auto 49px;
+    width: calc(100% - 44px - 49px);
+
+    &-learn-more {
+        display: flex;
+        align-items: center;
+        width: 170px;
+    }
+}
+
+.order-motiv__learn-more-info {
+    height: 22px;
+    width: 22px;
+    margin-right: 9px;
+
+    &-circle {
+        stroke: white;
+    }
+}
+
+.floor-feature__order-motiv-learn-more:hover .order-motiv__learn-more-info-circle,
+.floor-security__order-motiv-learn-more:hover .order-motiv__learn-more-info-circle {
+   fill: white;
+}
+
+.floor-feature__order-motiv-learn-more:hover .order-motiv__learn-more-info-i,
+.floor-security__order-motiv-learn-more:hover .order-motiv__learn-more-info-i {
+    fill: var(--mainColor);
+}
+
+.order-motiv__learn-more-text {
+    font-weight: 600;
+    line-height: normal;
+    font-size: 13px;
+}
+
+@media (max-width:820px) {
+    
+    .description-floor{
+        height: 304px;
+    
+        &-feature {
+            margin: -12px auto auto auto;
+            padding: 0 29px 0 29px;
+            height: 100%;
+            width: 100%;
+        }
+
+        &-feature__text {
+            margin: -11px auto 40px auto;
+        }
+    }
+
+    .description-floor-feature__specifications, .floor-feature__order-motiv{
+        display: none;
+    }
+    
+
+    .img-floor-feature {
+        width: calc(100% + 40px);
+        height: 337px;
+        margin: -2px auto 0 -40px;
+    
+        &__heading {
+            display: none;
+        }
+
+        &__foto-wrapper {
+            background-size: 122%;
+        }
+    }
+}
+
+@media (min-width:500px){
+    .img-floor-feature {
+        height: 540px;
+    }
+}
+
+@media (min-width:821px){
+    .floor-feature {
+        height: 900px;
+    
+        &__order-motiv{
+            display: flex;
+        }
+    }
+
+    .img-floor-feature {
+        width: calc(100% - 440px);
+        height: auto;
+    }
+    .description-floor-feature {
+        height: 900px;
+    
+        &__text {
+            margin: 51px 72px 62px 52px;
+        }
+    }
+}
