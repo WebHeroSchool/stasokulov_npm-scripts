@@ -35,7 +35,7 @@ const paths = {
     },
     target: {
         styles: 'target',
-        scripts: 'target',
+        scripts: './target',
         dir: './'
     },
     targetNames: {
@@ -69,14 +69,18 @@ switch (process.env.NODE_ENV) {
         break;
 };
 
-gulp.task('default', [
-    'clean',
-    'fonts',
-    'assets',
-    'css',
-    'js',
-    'compile'
-]);
+
+gulp.task('default', ['clean'], () => {
+        gulp.start(
+            'fonts',
+            'assets',
+            'js',
+            'css',
+            'compile'
+        )
+    }
+);
+
 
 gulp.task('clean', () => {
     return gulp.src('target/*', {read: false})
@@ -105,12 +109,12 @@ gulp.task('compile', () => {
 gulp.task('js', () => {
     return gulp.src(paths.src.scripts)
     .pipe(sourcemaps.init())
-        .pipe(concat(paths.targetNames.scripts))
-        .pipe(babel({
-            presets: ['@babel/env']
-        }))
-        .pipe(gulpif( process.env.NODE_ENV === 'production', uglify() ))
-        .pipe( sourcemaps.write() )
+    .pipe(concat(paths.targetNames.scripts))
+    .pipe(babel({
+        presets: ['@babel/env']
+    }))
+    .pipe(gulpif( process.env.NODE_ENV === 'production', uglify() ))
+    .pipe( sourcemaps.write() )
     .pipe(gulp.dest(paths.target.scripts));
 });
 
