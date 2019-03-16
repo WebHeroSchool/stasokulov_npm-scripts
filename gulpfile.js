@@ -14,6 +14,7 @@ const gulpif = require('gulp-if');
 const handlebars = require('gulp-compile-handlebars');
 const nested = require('postcss-nested');
 const postcss = require('gulp-postcss');
+const postcssCustomProperties = require('postcss-custom-properties');
 const postcssPresetEnv = require('postcss-preset-env');
 const rename = require('gulp-rename');
 const rulesScripts = require('./eslintrc.json');
@@ -27,14 +28,14 @@ const uglify = require('gulp-uglify');
 
 const paths = {
     src: {
-        styles: 'source/*css',
+        styles: 'source/**/*css',
         scripts: 'source/*js',
         dir: './source',
         assets: './source/img/**/*',
     },
     target: {
         styles: 'target',
-        scripts: 'target',
+        scripts: './target',
         dir: './'
     },
     targetNames: {
@@ -68,14 +69,18 @@ switch (process.env.NODE_ENV) {
         break;
 };
 
-gulp.task('default', [
-    'clean',
-    'fonts',
-    'assets',
-    'css',
-    'js',
-    'compile'
-]);
+
+gulp.task('default', ['clean'], () => {
+        gulp.start(
+            'fonts',
+            'assets',
+            'js',
+            'css',
+            'compile'
+        )
+    }
+);
+
 
 gulp.task('clean', () => {
     return gulp.src('target/*', {read: false})
@@ -104,12 +109,12 @@ gulp.task('compile', () => {
 gulp.task('js', () => {
     return gulp.src(paths.src.scripts)
     .pipe(sourcemaps.init())
-        .pipe(concat(paths.targetNames.scripts))
-        .pipe(babel({
-            presets: ['@babel/env']
-        }))
-        .pipe(gulpif( process.env.NODE_ENV === 'production', uglify() ))
-        .pipe( sourcemaps.write() )
+    .pipe(concat(paths.targetNames.scripts))
+    .pipe(babel({
+        presets: ['@babel/env']
+    }))
+    .pipe(gulpif( process.env.NODE_ENV === 'production', uglify() ))
+    .pipe( sourcemaps.write() )
     .pipe(gulp.dest(paths.target.scripts));
 });
 
@@ -123,13 +128,16 @@ gulp.task('css', () => {
           loadPaths: ['img/'],
           relativeTo: 'target/'
         }),
+        postcssCustomProperties({
+            preserve: false
+        }),
     ];
 
     return gulp.src([paths.src.styles])
     .pipe(sourcemaps.init())
-        .pipe(postcss(plugins))
-        .pipe(concat(paths.targetNames.styles))
-        .pipe(gulpif( process.env.NODE_ENV === 'production', cssnano() ))
+    .pipe(concat(paths.targetNames.styles))
+    .pipe(postcss(plugins))
+    .pipe(gulpif( process.env.NODE_ENV === 'production', cssnano() ))
     .pipe(sourcemaps.write()) 
     .pipe(gulp.dest(paths.target.styles));
 });
